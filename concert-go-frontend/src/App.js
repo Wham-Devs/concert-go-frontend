@@ -1,4 +1,4 @@
-import React from "react";
+import { useState } from "react";
 import './App.css';
 import { Routes, Route } from 'react-router-dom'
 import Header from "./components/Header";
@@ -20,6 +20,8 @@ import mockUsers from "./mockUsers";
 
 function App() {
 
+  const [currentEvent, setCurrentEvent] = useState(mockEvents)
+
   
   return (
    <>
@@ -29,13 +31,13 @@ function App() {
     <Route path="/signup" element={ <SignUp /> } />
     <Route path="/" element={ <Home /> } />
     <Route path="/concertgoedit" element={ <ConcertGoEdit /> } />
-    <Route path="/concertgoindex" element={ <ConcertGoIndex /> } />
+    <Route path="/concertgoindex" element={ <ConcertGoIndex currentEvent={ currentEvent }/> } />
     <Route path="/concertgoprotectedindex" element={ <ConcertGoProtectedIndex /> } />
     <Route path="/concertgonew" element={ <ConcertGoNew /> } />
     <Route path="/concertgoshow" element={ <ConcertGoShow /> } />
     <Route path="/aboutus" element={ <AboutUs /> } />
     <Route path="/concertgofaq" element={ <ConcertGoFAQ /> } />
-    <Route path="/notfound" element={ <NotFound /> } />
+    <Route path="/*" element={ <NotFound /> } />
    </Routes>   
    <Footer />
    </>
