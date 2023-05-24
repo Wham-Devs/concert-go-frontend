@@ -69,6 +69,9 @@ function App() {
 			method: "POST",
 		})
 			.then((response) => {
+        if (!response.ok) {
+        throw Error(response.statusText);
+      }
 				localStorage.setItem("token", response.headers.get("Authorization"));
 				return response.json();
 			})
@@ -89,6 +92,9 @@ function App() {
 			method: "POST",
 		})
 			.then((response) => {
+        if (!response.ok) {
+        throw Error(response.statusText);
+      }
 				localStorage.setItem("token", response.headers.get("Authorization"));
 				return response.json();
 			})
