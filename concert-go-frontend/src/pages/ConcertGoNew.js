@@ -31,9 +31,7 @@ const handleClick = () => {
 
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4 ml-4 text-center">
-        Create a New Event:
-      </h1>
+
       <div className="h-screen flex">
         <div className="flex w-1/2 bg-gradient-to-tr from-red-900 to-red-500 i justify-around items-center">
           <div>
