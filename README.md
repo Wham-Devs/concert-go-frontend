@@ -1,79 +1,68 @@
-ConcertGO
+# ConcertGo
 
-ConcertGo is a web application that helps users discover upcoming concerts and events in their area. 
+ConcertGo is a web application that helps users discover upcoming concerts and events in their area.
 
-Features
+## Features
 
-- View all event cards on the ConcertGo landing page
-- Click on one event to get full details for that specific show
+- Search concerts by location through the Ticketmaster API
+- View all event cards on the ConcertGo Events List
 - Create a free account to access the full application
-- Create/Update your own concert posting
-- As a logged in user view your watch list to keep track of the events you are interested in
+- Logged in users can view their watch list to keep track of events
+- Click on an event to get full details and visit the artist's Spotify page
+- Create new concert postings or update existing events
 
-IceBox Features
-
-- Search by location, date, artist, or genre
-- View a carousel of upcoming events on the home page
-- Listen to Artist preview track on the show page with the (Spotify API)
-- Buy ticket and select your seats (Ticket Master API)
-- Update your calendar to your selected concerts (Google Calendar API)
-
-Technologies Used
+## Technologies Used
 
 - React
   - React Strap components
-  - Tailwinds CSS for styling
-  - React Router Dom
+  - Tailwind CSS for styling
+  - CSS for video background
+  - React Router Dom for navigation
   - React Testing Library
-
 
 - Ruby on Rails
   - Rspec Testing
-  - Devise
+  - Devise and JWT for encrypted login/authorization
+  - Ruby
 
+## API Usage
 
-API Usage
+- Ticketmaster API
+- Concert Go API
 
-ConcertGo utilizes the following APIs (possibly):
-
-- Ticketmaster API: Provides access to concert and event data.
-- Spotify API: Retrieves artist information and related content
-
-License
+## License
 
 - Product of Wham! Development
 
-Acknowledgments
+## Acknowledgments
 
 Product Manager - Jake Dahlgren
- - Managed workflows
- - Lead discussions surrounding large changes to the app
- - Progress Updates at the end of the day
+- Managed workflows
+- Led discussions surrounding major app changes
+- Provided progress updates
 
 Project Manager - James Lee
-
-- Created the Trello board so the team has clear step by step direction to the end product
-- Keeps track of which cards each team member is working on
-- Keeps Slack channel active with updates and pins appropriate content
-- Communicates with the instructores when PRs are ready and moves Trello cards to appropriate swimlane
+- Created Trello board for clear project direction
+- Assigned and tracked team members' tasks
+- Maintained active communication in Slack
+- Coordinated with instructors for PRs
 
 Tech Lead/Anchor - Felix Lopez
-
-- Incharge of the technical needs of the project
-- Takes lead when blockers arise, and helps support the team through any challenges with the code
-- Controls all thing Github. Merging, conflicts, and branch managment
-- Presents Blockers to class during standup
+- Managed technical aspects of the project
+- Resolved blockers and supported the team
+- Oversaw GitHub processes (merging, conflicts, branches)
+- Presented blockers during standup
 
 Design Lead - Mark Nou
+- Led UI/UX discussions
+- Created and updated wireframes
+- Ensured consistent branding, color scheme, and format
+- Ensured intuitive navigation and responsive design
 
-- Incharge of all UI/UX discussions for the project
-- Creator of the wireframe, and any updates to the wireframe
-- Oversees the branding, color scheme, and format are consistent throughout the application
-- Ensures intuitive navigation, responsive design, and accessibility features meet quality standards
+## Deployment Link
 
-Demo or Deployment link
+- [ConcertGo Deployment](https://concertgo.onrender.com)
 
-Contact
+## Contact
 
-For any inquiries or questions, please contact the Wham! Development team at Wham.Development.Devs@gmail.com
-
+For inquiries or questions, please contact the Wham! Development team at Wham.Development.Devs@gmail.com
