@@ -81,7 +81,7 @@ const handleSubmit = (e) => {
               </svg>
               <input
                 className="pl-2 outline-none border-none"
-                type="text"
+                type="password"
                 name="password"
                 placeholder="Password"
                 
@@ -102,7 +102,7 @@ const handleSubmit = (e) => {
               </svg>
               <input
                 className="pl-2 outline-none border-none"
-                type="text"
+                type="password"
                 name="password_confirmation"
                 placeholder="Re-enter Password"
               />

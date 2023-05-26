@@ -16,6 +16,7 @@ const [newEvent, setNewEvent] = useState({
   show_time: "",
   genre: "",
   images: "",
+  spotify: "",
   user_id: currentUser.id
 });
 
@@ -149,6 +150,18 @@ const handleClick = () => {
                 className="shadow-lg border-3 border-black"
                 onChange={handleChange}
                 value={newEvent.images}
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="images">Spotify URL</Label>
+              <Input
+                id="event-images"
+                name="images"
+                placeholder="Enter Spotify URL"
+                type="text"
+                className="shadow-lg border-3 border-black"
+                onChange={handleChange}
+                value={newEvent.spotify}
               />
             </FormGroup>
             <Button className="submit" onClick={handleClick}>Submit</Button>

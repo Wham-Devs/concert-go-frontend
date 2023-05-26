@@ -156,7 +156,7 @@ const ConcertGoEdit = ({
               />
             </FormGroup>
             <FormGroup>
-              <Label for="spotify">Image URL</Label>
+              <Label for="spotify">Spotify URL</Label>
               <Input
                 id="event-spotify"
                 name="spotify"
