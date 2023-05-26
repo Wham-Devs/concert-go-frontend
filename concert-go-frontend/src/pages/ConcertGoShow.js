@@ -1,46 +1,76 @@
 import React from "react";
 import { useParams } from "react-router-dom";
 import spotify from "../assets/spotify.svg";
+import Swal from "sweetalert2";
+import { NavLink } from "react-router-dom";
 
-const ConcertGoShow = ({ currentEvent }) => {
+const ConcertGoShow = ({ currentEvent, createLiked }) => {
   const { id } = useParams();
   let selectedEvent = currentEvent?.find((event) => event.id === +id);
   if (!selectedEvent) {
     return <div>Loading...</div>;
   }
+  const handleLike = (id) => {
+    const likedId = parseInt(id, 10);
+    const newLikedEvent = { liked: likedId };
+    createLiked(newLikedEvent);
+  };
+  const showAlert = () => {
+    Swal.fire({
+      title: "Liked!",
+      text: "Your event has been liked.",
+      icon: "success",
+      confirmButtonText: "OK",
+    });
+  };
 
   return (
     <>
-      <div className="h-screen w-screen bg-black">
-        <div class="flex bg-black shadow-md rounded-xl overflow-hidden pt-10  ">
-          <div class="w-1/2">
+      <div className="min-h-screen bg-black">
+        <div className="flex justify-center items-center h-full">
+          <div className="max-w-5xl w-full overflow-hidden shadow-lg bg-gray-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100">
+            <div className="relative">
+              <img
+                src={selectedEvent.images}
+                alt="Card Image"
+                className="w-full h-full object-cover rounded-t-xl"
+              />
+            </div>
+            <div className="p-6">
+              <h1 className="italic text-7xl text-gray-400 font-anton">
+                {selectedEvent.artist}
+              </h1>
+              <h4 className="text-bold text-4xl text-gray-500">
+                {selectedEvent.genre}
+              </h4>{" "}
+              <br />
+              <h5 className="text-gray-400 text-3xl">
+                {selectedEvent.venue} <br /> {selectedEvent.city},{" "}
+                {selectedEvent.state}
+              </h5>
+              <h6 className="text-gray-500 text-2xl">
+                {selectedEvent.date} @ {selectedEvent.show_time}
+              </h6>
+              <button
+                className="text-7xl text-green-300"
+                onClick={() => {
+                  handleLike(id);
+                  showAlert();
+                }}
+              >
+                ❤️
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-center mt-4">
+          <NavLink to={selectedEvent.spotify}>
             <img
-              className="rounded-xl "
-              src={selectedEvent.images}
-              alt="Image"
-              class="object-cover h-full w-full"
+              className="h-64 transform hover:scale-105 transition-transform duration-300"
+              src={spotify}
+              alt="Spotify Logo"
             />
-          </div>
-
-          <div class="w-1/2 p-6">
-            <h2 className="text-9xl font-anton italic font-bold mb-4">
-              {selectedEvent.artist}
-            </h2>
-            <h1 className="text-gray-400">{selectedEvent.genre}</h1>
-            <br />
-            <br />
-            <br />
-            <h1 className="text-gray-300">{selectedEvent.venue}</h1>
-            <h1 className="text-gray-300">
-              {selectedEvent.city}, {selectedEvent.state}
-            </h1>{" "}
-            <br />
-            <h1 className="text-gray-200">
-              {selectedEvent.date} @ {selectedEvent.show_time} <br />
-            </h1>
-          </div>
-
-          <img src={spotify} />
+          </NavLink>
         </div>
       </div>
     </>

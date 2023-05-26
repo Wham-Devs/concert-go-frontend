@@ -1,37 +1,34 @@
-import {useNavigate} from "react-router-dom"
-import { useState } from "react"
-import { Form, FormGroup, Label, Input, Button } from "reactstrap"
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
 
+const ConcertGoNew = ({ createEvent, currentUser }) => {
+  const navigate = useNavigate();
 
-const ConcertGoNew = ({createEvent, currentUser}) => {
+  const [newEvent, setNewEvent] = useState({
+    city: "",
+    state: "",
+    venue: "",
+    artist: "",
+    date: "",
+    show_time: "",
+    genre: "",
+    images: "",
+    spotify: "",
+    user_id: currentUser.id,
+  });
 
-const navigate = useNavigate()
+  const handleChange = (e) => {
+    setNewEvent({ ...newEvent, [e.target.name]: e.target.value });
+  };
 
-const [newEvent, setNewEvent] = useState({
-  city: "",
-  state: "",
-  venue: "",
-  artist: "",
-  date: "",
-  show_time: "",
-  genre: "",
-  images: "",
-  user_id: currentUser.id
-});
-
-
-const handleChange = (e) => {
-  setNewEvent({...newEvent, [e.target.name]: e.target.value})
-}
-
-const handleClick = () => {
-  createEvent(newEvent)
-  navigate("/concertgoprotectedindex")
-}
+  const handleClick = () => {
+    createEvent(newEvent);
+    navigate("/concertgoprotectedindex");
+  };
 
   return (
     <>
-
       <div className="h-screen flex">
         <div className="flex w-1/2 bg-gradient-to-tr from-red-900 to-red-500 i justify-around items-center">
           <div>
@@ -151,12 +148,26 @@ const handleClick = () => {
                 value={newEvent.images}
               />
             </FormGroup>
-            <Button className="submit" onClick={handleClick}>Submit</Button>
+            <FormGroup>
+              <Label for="spotify">Spotify URL</Label>
+              <Input
+                id="event-spotify"
+                name="spotify"
+                placeholder="Enter Spotify URL here"
+                type="text"
+                className="shadow-lg border-3 border-black"
+                onChange={handleChange}
+                value={newEvent.spotify}
+              />
+            </FormGroup>
+            <Button className="submit" onClick={handleClick}>
+              Submit
+            </Button>
           </Form>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ConcertGoNew
+export default ConcertGoNew;
