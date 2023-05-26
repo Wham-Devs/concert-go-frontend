@@ -22,7 +22,7 @@ const ConcertGoEdit = ({
     date: current?.date,
     show_time: current?.show_time,
     genre: current?.genre,
-    spotfy: current?.spotify,
+    spotify: current?.spotify,
     images: current?.images,
   });
 
