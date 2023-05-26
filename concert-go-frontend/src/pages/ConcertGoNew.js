@@ -153,10 +153,10 @@ const handleClick = () => {
               />
             </FormGroup>
             <FormGroup>
-              <Label for="images">Spotify URL</Label>
+              <Label for="spotify">Spotify URL</Label>
               <Input
-                id="event-images"
-                name="images"
+                id="event-spotify"
+                name="spotify"
                 placeholder="Enter Spotify URL"
                 type="text"
                 className="shadow-lg border-3 border-black"
