@@ -1,93 +1,180 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-import rightarrow from "../assets/rightarrow.svg";
-import leftarrow from "../assets/leftarrow.svg";
-import Swal from "sweetalert2";
+import { useState } from "react";
+import { Form, FormGroup, Label, Input, Button } from "reactstrap";
+import { useNavigate, useParams } from "react-router-dom";
 
-const ConcertGoProtectedIndex = ({
+const ConcertGoEdit = ({
   currentEvent,
+  updateEvent,
   currentUser,
   deleteEvent,
 }) => {
-  const myEvents = currentEvent?.filter(
-    (events) => currentUser?.id === events.user_id
-  );
+  const { id } = useParams();
 
-  const showAlert = () => {
-    Swal.fire({
-      title: "Event Deleted!",
-      text: "Your event has been deleted.",
-      icon: "warning",
-      confirmButtonText: "OK",
-    });
+  const navigate = useNavigate();
+  let current = currentEvent?.find((event) => event.id === +id);
+
+  const [editEvent, setEditEvent] = useState({
+    user_id: currentUser?.id,
+    city: current?.city,
+    state: current?.state,
+    venue: current?.venue,
+    artist: current?.artist,
+    date: current?.date,
+    show_time: current?.show_time,
+    genre: current?.genre,
+    spotfy: current?.spotify,
+    images: current?.images,
+  });
+
+  const handleChange = (e) => {
+    setEditEvent({ ...editEvent, [e.target.name]: e.target.value });
   };
+
+  const handleSubmit = () => {
+    updateEvent(editEvent, current.id);
+    navigate(`/concertgoshow/${id}`);
+  };
+
   return (
-    <div className=" bg-black">
-      {" "}
-      <br />
-      <br />
-      <div className="flex items-center justify-center">
-        <img src={leftarrow} className="h-60" alt="Logo" />
-
-        <h1 className="text-5xl text-gray-500 font-anton italic text-center bg-black ml-0 mr-0 relative z-10">
-          YOUR EVENTS
-        </h1>
-
-        <img src={rightarrow} className="h-60" alt="Logo" />
+    <>
+      <div className="h-screen flex">
+        <div className="flex w-1/2 bg-gradient-to-tr from-red-900 to-red-500 i justify-around items-center">
+          <div>
+            <h1 className="text-gray-200 font-bold text-7xl font-anton shadow-black italic ">
+              CONCERT GO
+            </h1>
+            <p className="text-white mt-1 ml-1 shadow-lg shadow-gray-800 italic">
+              FIND YOUR NEXT VENUE
+            </p>
+            <button
+              type="submit"
+              className="block w-28 bg-white text-indigo-800 mt-4 py-2 rounded-2xl font-bold mb-2"
+            >
+              Read More
+            </button>
+          </div>
+        </div>
+        <div className="flex w-1/2 justify-center items-center bg-white">
+          <Form
+            className=" shadow-lg shadow-gray-400 border-gray-200 border-4 p-4 rounded-lg"
+            style={{ width: "90%", margin: "auto" }}
+          >
+            <FormGroup>
+              <Label for="city">City</Label>
+              <Input
+                id="event-city"
+                name="city"
+                placeholder="Enter city here"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.city}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="state">State</Label>
+              <Input
+                id="event-state"
+                name="state"
+                placeholder="Enter state here"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.state}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="venue">Venue</Label>
+              <Input
+                id="event-venue"
+                name="venue"
+                placeholder="Enter venue here"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.venue}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="artist">Artist</Label>
+              <Input
+                id="event-artist"
+                name="artist"
+                placeholder="Enter artist here"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.artist}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="date">Date</Label>
+              <Input
+                id="event-date"
+                name="date"
+                placeholder="Enter date here"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.date}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="show_time">Show Time</Label>
+              <Input
+                id="show_time"
+                name="show_time"
+                placeholder="Enter show time here"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.show_time}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="genre">Genre</Label>
+              <Input
+                id="event-genre"
+                name="genre"
+                placeholder="Enter genre here"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.genre}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="images">Image URL</Label>
+              <Input
+                id="event-images"
+                name="images"
+                placeholder="Enter image URL"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.images}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <FormGroup>
+              <Label for="spotify">Image URL</Label>
+              <Input
+                id="event-spotify"
+                name="spotify"
+                placeholder="Enter Spotify URL"
+                type="text"
+                onChange={handleChange}
+                value={editEvent.spotify}
+                className="shadow-lg border-3 border-black"
+              />
+            </FormGroup>
+            <Button onClick={handleSubmit} name="button">
+              Submit
+            </Button>
+          </Form>
+        </div>
       </div>
-      <div className="grid grid-cols-4 gap-8 justify-center align-middle pt-10">
-        {myEvents.map((events, index) => {
-          return (
-            <div key={index}>
-              <div className="max-w-3xl mx-auto overflow-hidden shadow-lg transform hover:scale-105 transition-transform duration-300 bg-gray-400 rounded-xl bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-10 border border-gray-100  hover:bg-white">
-                <div className="relative">
-                  <img
-                    src={events.images}
-                    alt="Card Image"
-                    className="w-full h-64 object-cover rounded-xl"
-                  />
-                </div>
-                <div className="p-6">
-                  <h1 className="italic text-gray-400 font-anton">
-                    {events.artist}
-                  </h1>
-                  <h4 className="text-bold text-gray-500">{events.genre}</h4>{" "}
-                  <br />
-                  <h5 className="text-gray-400">
-                    {events.venue} <br /> {events.city}, {events.state}
-                  </h5>
-                  <h6 className="text-gray-500">
-                    {events.date} @ {events.show_time}
-                  </h6>
-                </div>
-                <div className="flex justify-end">
-                  <NavLink to={`/concertgoedit/${events.id}`} className="mx-2">
-                    <button className="backdrop bg-transparent text-gray-700 bg-opacity-0 border border-white px-4 pl-4 py-2 mb-2 mx-auto rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-opacity-10 text-lg  text-center transform hover:scale-105 transition-transform duration-300">
-                      Edit Event
-                    </button>
-                  </NavLink>
-                  <NavLink
-                    className="mx-auto transform hover:scale-105 transition-transform duration-300"
-                    to="/concertgoprotectedindex"
-                  >
-                    <button
-                      onClick={() => {
-                        deleteEvent(events.id);
-                        showAlert();
-                      }}
-                      className="backdrop bg-transparent text-red-500 bg-opacity-0 border border-white px-4 pl-4 py-2 mb-2 mx-auto rounded focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-40 hover:bg-opacity-10 text-lg  text-center"
-                    >
-                      Delete Event
-                    </button>
-                  </NavLink>
-                </div>
-              </div>
-            </div>
-          );
-        })}
-      </div>
-    </div>
+    </>
   );
 };
 
-export default ConcertGoProtectedIndex;
+export default ConcertGoEdit;
