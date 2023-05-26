@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Header from "./components/Header";
-import TicketMasterAPI from "./pages/TicketMasterAPI";
+import MyLikedEvents from "./pages/MyLikedEvents";
 import ConcertGoEdit from "./pages/ConcertGoEdit";
 import ConcertGoIndex from "./pages/ConcertGoIndex";
 import ConcertGoNew from "./pages/ConcertGoNew";
@@ -17,20 +17,63 @@ import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import { useEffect } from "react";
 import TestCard from "./components/TestCard";
+import TicketMasterAPI from "./pages/TicketMasterAPI";
 
 function App() {
   const [currentEvent, setCurrentEvent] = useState([]);
   const [currentTicketMaster, setCurrentTicketMaster] = useState(null);
   const [currentUser, setCurrentUser] = useState(null);
+  const [likedEvents, setLikedEvents] = useState([]);
 
   useEffect(() => {
     readEvent();
     ticketMasterAPI();
+    readLiked();
   }, []);
 
   const url = "https://concertgo-backend.onrender.com";
   const apiKey = process.env.REACT_APP_CONCERT_GO_API_KEY;
 
+  // Read LikedEvents API Fetch
+  const readLiked = () => {
+    fetch(`${url}/liked_events`)
+      .then((response) => response.json())
+      .then((payload) => {
+        setLikedEvents(payload);
+      })
+      .catch((error) => console.log("liked_events read errors: ", error));
+  };
+
+  // Create LikedEvents API Fetch
+  const createLiked = (createdLiked) => {
+    fetch(`${url}/liked_events`, {
+      body: JSON.stringify(createdLiked),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+    })
+      .then((response) => response.json())
+      .then(() => readLiked())
+      .catch((error) => console.log("create error: ", error));
+  };
+
+  // Delete LikedEvents APi Fetch
+  // DELETE
+  const deleteLikedEvent = (id) => {
+    fetch(`${url}/liked_events/${id}`, {
+      body: JSON.stringify(),
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then(() => readEvent())
+      .catch((error) => console.log("delete error: ", error));
+  };
+
+  // TicketMaster API Fetch
   const ticketMasterAPI = () => {
     fetch(
       "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=LcWUOGfoF3Gb6ZcpswipMTtkcoVr9gPw&locale=*"
@@ -207,7 +250,8 @@ function App() {
           element={
             <ConcertGoShow
               currentEvent={currentEvent}
-              deleteEvent={deleteEvent}
+              likedEvents={likedEvents}
+              createLiked={createLiked}
             />
           }
         />
@@ -221,6 +265,16 @@ function App() {
         <Route path="/concertgofaqs" element={<ConcertGoFAQ />} />
         <Route path="/*" element={<NotFound />} />
         <Route path="/test" element={<TestCard />} />
+        <Route
+          path="/likedevents"
+          element={
+            <MyLikedEvents
+              currentEvent={currentEvent}
+              likedEvents={likedEvents}
+              deleteLikedEvent={deleteLikedEvent}
+            />
+          }
+        />
       </Routes>
       <Footer />
     </>
