@@ -76,7 +76,7 @@ function App() {
   // TicketMaster API Fetch
   const ticketMasterAPI = () => {
     fetch(
-      "https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=LcWUOGfoF3Gb6ZcpswipMTtkcoVr9gPw&locale=*"
+      `https://app.ticketmaster.com/discovery/v2/events.json?classificationName=music&dmaId=324&apikey=${apiKey}&locale=*`
     )
       .then((response) => response.json())
       .then((payload) => setCurrentTicketMaster(payload))
