@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import TicketMasterAPI from "./TicketMasterAPI";
 import { NavLink } from "react-router-dom";
 import rightarrow from "../assets/rightarrow.svg";
