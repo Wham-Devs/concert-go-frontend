@@ -65,7 +65,7 @@ const ConcertGoShow = ({ currentEvent, createLiked }) => {
           </div>
         </div>
         <div className="flex justify-center mt-4">
-          <NavLink to={selectedEvent.spotify}>
+          <NavLink to={selectedEvent.spotify} target="_blank">
             <img
               className="h-64 transform hover:scale-105 transition-transform duration-300"
               src={spotify}
